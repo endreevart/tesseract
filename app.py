@@ -1,4 +1,4 @@
-rom flask import Flask, render_template, request
+From flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import pytesseract
 import os
