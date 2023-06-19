@@ -6,100 +6,61 @@
 
 
 ```
-pip install flask pytesseract pillow
+pip install Flask
+pip install pytesseract
+pip install Pillow
+pip install PyPDF2
 ```
-
-Шаг 2: Создание проекта
-
-- Создайте новую папку для вашего проекта.
-- В этой папке создайте файл app.py.
-  
-Шаг 3: Кодирование приложения Flask
-
-- Откройте файл app.py в текстовом редакторе или интегрированной среде разработки (IDE).
-- Скопируйте следующий код в файл app.py:
+Для поддержки русского языка вам также понадобятся дополнительные данные языка для pytesseract. Вот команда для установки данных русского языка:
 
 ```
-from flask import Flask, render_template, request
-import pytesseract
-from PIL import Image
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/upload', methods=['POST'])
-def upload():
-    # Получаем изображение из запроса
-    image_file = request.files['image']
-    image = Image.open(image_file)
-
-    # Применяем Tesseract для распознавания текста
-    text = pytesseract.image_to_string(image)
-
-    return render_template('result.html', text=text)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+pip install pytesseract[rus]
 
 ```
 
-Шаг 4: Создание шаблонов HTML
+Шаг 2: Создание шаблонов HTML
+Создайте два файла шаблонов HTML: index.html и result.html. 
+Создайте папку с именем templates в том же каталоге, где находится app.py, и поместите эти файлы внутрь папки templates. 
+Вот примеры содержимого этих файлов (код остается таким же):
 
-- В папке проекта создайте папку templates.
-- В папке templates создайте файл index.html со следующим содержимым:
+index.html
+
 
 ```
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>OCR Web Interface</title>
-  </head>
-  <body>
-    <h1>OCR Web Interface</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="image" accept="image/*" required>
-      <input type="submit" value="Upload">
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+    <h1>Upload File</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
     </form>
-  </body>
+</body>
 </html>
 
+
 ```
-
-В папке templates создайте файл result.html со следующим содержимым:
-
+  
+result.html
 
 
 ```
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>OCR Result</title>
-  </head>
-  <body>
-    <h1>OCR Result</h1>
-    <p>{{ text }}</p>
-  </body>
+<head>
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result</h1>
+    <pre>{{ text }}</pre>
+</body>
 </html>
 
-```
-
-Шаг 5: Запуск приложения
-
-В командной строке или терминале перейдите в папку с вашим проектом.
-Выполните следующую команду для запуска приложения:
-
-
-```
-python app.py
 
 ```
 
-Шаг 6: Использование веб-интерфейса
 
-Откройте веб-браузер и перейдите по адресу http://localhost:5000/.
-Вы увидите главную страницу с формой загрузки изображения.
-Выберите изображение для загрузки и нажмите кнопку "Upload".
-После загрузки изображения будет выполнено распознавание текста с помощью Tesseract, и результат распознавания будет отображен на странице с результатом.
+
