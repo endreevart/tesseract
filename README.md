@@ -4,7 +4,7 @@
 Откройте командную строку или терминал.
 Выполните следующую команду для установки необходимых пакетов:
 
-<pip install flask pytesseract pillow>
+"pip install flask pytesseract pillow"
 
 
 Шаг 2: Создание проекта
