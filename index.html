@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>OCR Web Interface</title>
-  </head>
-  <body>
-    <h1>OCR Web Interface</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="image" accept="image/*" required>
-      <input type="submit" value="Upload">
-    </form>
-  </body>
+<head>
+    <title>OCR Demo</title>
+</head>
+<body>
+<h1>OCR Demo</h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+</form>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+</body>
 </html>
